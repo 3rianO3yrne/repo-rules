@@ -3,7 +3,7 @@ resource "github_branch_protection" "this" {
   repository_id = each.key
 
   pattern                         = "main"
-  enforce_admins                  = true
+  enforce_admins                  = false
   require_signed_commits          = true
   required_linear_history         = true
   require_conversation_resolution = true
@@ -16,7 +16,8 @@ resource "github_branch_protection" "this" {
   required_pull_request_reviews {
     dismiss_stale_reviews      = true
     require_code_owner_reviews = true
-    require_last_push_approval = true
+    require_last_push_approval = false
+    pull_request_bypassers = ["/${var.owner}"]
   }
 }
 
